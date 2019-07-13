@@ -173,6 +173,7 @@ public class LavalinkPlayer implements IPlayer {
      * @see LavalinkPlayer#getFilters()
      */
     @Override
+    @Deprecated
     public void setVolume(int volume) {
         if (filters == null && volume == 100) return;
         getFilters().setVolume(volume / 100).commit();
@@ -197,6 +198,18 @@ public class LavalinkPlayer implements IPlayer {
     @CheckReturnValue
     public Filters getFilters() {
         if (filters == null) filters = new Filters(this, this::onCommit);
+        return filters;
+    }
+
+    /**
+     * @return a builder that allows setting filters such as volume, an equalizer, etc.
+     * @see Filters#commit()
+     */
+    @SuppressWarnings({"WeakerAccess", "unused"})
+    @Nonnull
+    @CheckReturnValue
+    public Filters getFilters() {
+        if (filters == null) return new Filters(this, this::onCommit);
         return filters;
     }
 
