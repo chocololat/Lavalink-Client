@@ -81,7 +81,7 @@ public class LavalinkUtil {
      * @throws IOException if there is an IO problem
      */
     public static AudioTrack toAudioTrack(String message) throws IOException {
-        return toAudioTrack(java.util.Base64.getDecoder().decode(message));
+        return toAudioTrack(Base64.getDecoder().decode(message));
     }
 
     /**
