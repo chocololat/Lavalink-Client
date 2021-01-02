@@ -201,18 +201,6 @@ public class LavalinkPlayer implements IPlayer {
         return filters;
     }
 
-    /**
-     * @return a builder that allows setting filters such as volume, an equalizer, etc.
-     * @see Filters#commit()
-     */
-    @SuppressWarnings({"WeakerAccess", "unused"})
-    @Nonnull
-    @CheckReturnValue
-    public Filters getFilters() {
-        if (filters == null) return new Filters(this, this::onCommit);
-        return filters;
-    }
-
     public void provideState(JSONObject json) {
         updateTime = json.getLong("time");
         position = json.optLong("position", 0);
