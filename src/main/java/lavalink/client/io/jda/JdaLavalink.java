@@ -58,13 +58,13 @@ public class JdaLavalink extends Lavalink<JdaLink> implements EventListener {
     @SuppressWarnings("WeakerAccess")
     @NonNull
     public JdaLink getLink(Guild guild) {
-        return getLink(guild.getId());
+        return getLink(guild.getIdLong());
     }
 
     @SuppressWarnings({"WeakerAccess", "unused"})
     @Nullable
     public JdaLink getExistingLink(Guild guild) {
-        return getExistingLink(guild.getId());
+        return getExistingLink(guild.getIdLong());
     }
 
     /**
@@ -118,9 +118,9 @@ public class JdaLavalink extends Lavalink<JdaLink> implements EventListener {
                 getLinksMap().forEach((guildId, link) -> {
                     try {
                         //Note: We also ensure that the link belongs to the JDA object
-                        if (link.getLastChannel() != null
+                        if (link.getLastChannelId() != -1
                                 && event.getJDA().getGuildById(guildId) != null) {
-                            link.connect(event.getJDA().getVoiceChannelById(link.getLastChannel()), false);
+                            link.connect(event.getJDA().getVoiceChannelById(link.getLastChannelId()), false);
                         }
                     } catch (Exception e) {
                         log.error("Caught exception while trying to reconnect link " + link, e);
@@ -128,21 +128,21 @@ public class JdaLavalink extends Lavalink<JdaLink> implements EventListener {
                 });
             }
         } else if (event instanceof GuildLeaveEvent) {
-            JdaLink link = getLinksMap().get(((GuildLeaveEvent) event).getGuild().getId());
+            JdaLink link = getLinksMap().get(((GuildLeaveEvent) event).getGuild().getIdLong());
             if (link == null) return;
 
             link.removeConnection();
         } else if (event instanceof VoiceChannelDeleteEvent) {
             VoiceChannelDeleteEvent e = (VoiceChannelDeleteEvent) event;
-            JdaLink link = getLinksMap().get(e.getGuild().getId());
-            if (link == null || !e.getChannel().getId().equals(link.getLastChannel())) return;
+            JdaLink link = getLinksMap().get(e.getGuild().getIdLong());
+            if (link == null || e.getChannel().getIdLong() != link.getLastChannelId()) return;
 
             link.removeConnection();
         }
     }
 
     @Override
-    protected JdaLink buildNewLink(String guildId) {
+    protected JdaLink buildNewLink(long guildId) {
         return new JdaLink(this, guildId);
     }
 }

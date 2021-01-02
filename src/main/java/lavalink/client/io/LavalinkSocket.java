@@ -94,7 +94,7 @@ public class LavalinkSocket extends ReusableWebSocket {
 
         switch (json.getString("op")) {
             case "playerUpdate":
-                lavalink.getLink(json.getString("guildId"))
+                lavalink.getLink(json.getLong("guildId"))
                         .getPlayer()
                         .provideState(json.getJSONObject("state"));
                 break;
@@ -123,15 +123,16 @@ public class LavalinkSocket extends ReusableWebSocket {
      * 4. WebSocketClosedEvent
      */
     private void handleEvent(JSONObject json) throws IOException {
-        Link link = lavalink.getLink(json.getString("guildId"));
-        LavalinkPlayer player = lavalink.getLink(json.getString("guildId")).getPlayer();
+        long guildId = json.getLong("guildId");
+        Link link = lavalink.getLink(guildId);
+        LavalinkPlayer player = lavalink.getLink(guildId).getPlayer();
         PlayerEvent event = null;
 
         switch (json.getString("type")) {
             case "TrackStartEvent":
                 event = new TrackStartEvent(player,
                         LavalinkUtil.toAudioTrackWithData(player, json.getString("track"))
-                        );
+                );
                 break;
             case "TrackEndEvent":
                 event = new TrackEndEvent(player,
@@ -225,7 +226,7 @@ public class LavalinkSocket extends ReusableWebSocket {
     }
 
     long getReconnectInterval() {
-        return reconnectsAttempted * 2000 - 2000;
+        return reconnectsAttempted * 2000L - 2000;
     }
 
     @Nullable

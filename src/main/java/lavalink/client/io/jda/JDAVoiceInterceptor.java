@@ -33,7 +33,7 @@ public class JDAVoiceInterceptor implements VoiceDispatchInterceptor {
     public boolean onVoiceStateUpdate(@Nonnull VoiceStateUpdate update) {
 
         VoiceChannel channel = update.getChannel();
-        JdaLink link = lavalink.getLink(update.getGuildId());
+        JdaLink link = lavalink.getLink(update.getGuildIdLong());
 
         if (channel == null) {
             // Null channel means disconnected
@@ -41,7 +41,7 @@ public class JDAVoiceInterceptor implements VoiceDispatchInterceptor {
                 link.onDisconnected();
             }
         } else {
-            link.setChannel(channel.getId()); // Change expected channel
+            link.setChannelId(channel.getIdLong()); // Change expected channel
         }
 
         return link.getState() == Link.State.CONNECTED;

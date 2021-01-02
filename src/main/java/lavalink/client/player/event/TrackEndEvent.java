@@ -28,8 +28,8 @@ import lavalink.client.player.IPlayer;
 
 public class TrackEndEvent extends PlayerEvent {
 
-    private AudioTrack track;
-    private AudioTrackEndReason reason;
+    private final AudioTrack track;
+    private final AudioTrackEndReason reason;
 
     public TrackEndEvent(IPlayer player, AudioTrack track, AudioTrackEndReason reason) {
         super(player);
@@ -38,10 +38,10 @@ public class TrackEndEvent extends PlayerEvent {
     }
 
     public AudioTrack getTrack() {
-        return track;
+        return this.track;
     }
 
     public AudioTrackEndReason getReason() {
-        return reason;
+        return this.reason;
     }
 }

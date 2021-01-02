@@ -31,6 +31,7 @@ public class PlayerEventListenerAdapter implements IPlayerEventListener {
     /**
      * @param player Audio player
      */
+    @SuppressWarnings("unused")
     public void onPlayerPause(IPlayer player) {
         // Adapter dummy method
     }
@@ -38,6 +39,7 @@ public class PlayerEventListenerAdapter implements IPlayerEventListener {
     /**
      * @param player Audio player
      */
+    @SuppressWarnings("unused")
     public void onPlayerResume(IPlayer player) {
         // Adapter dummy method
     }
@@ -46,6 +48,7 @@ public class PlayerEventListenerAdapter implements IPlayerEventListener {
      * @param player Audio player
      * @param track Audio track that started
      */
+    @SuppressWarnings("unused")
     public void onTrackStart(IPlayer player, AudioTrack track) {
         // Adapter dummy method
     }
@@ -55,6 +58,7 @@ public class PlayerEventListenerAdapter implements IPlayerEventListener {
      * @param track Audio track that ended
      * @param endReason The reason why the track stopped playing
      */
+    @SuppressWarnings("unused")
     public void onTrackEnd(IPlayer player, AudioTrack track, AudioTrackEndReason endReason) {
         // Adapter dummy method
     }
@@ -64,6 +68,7 @@ public class PlayerEventListenerAdapter implements IPlayerEventListener {
      * @param track Audio track where the exception occurred
      * @param exception The exception that occurred
      */
+    @SuppressWarnings("unused")
     public void onTrackException(IPlayer player, AudioTrack track, Exception exception) {
         // Adapter dummy method
     }
@@ -73,6 +78,7 @@ public class PlayerEventListenerAdapter implements IPlayerEventListener {
      * @param track Audio track where the exception occurred
      * @param thresholdMs The wait threshold that was exceeded for this event to trigger
      */
+    @SuppressWarnings("unused")
     public void onTrackStuck(IPlayer player, AudioTrack track, long thresholdMs) {
         // Adapter dummy method
     }

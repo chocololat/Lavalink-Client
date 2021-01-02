@@ -25,16 +25,12 @@ package lavalink.client.io;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft;
 import org.java_websocket.handshake.ServerHandshake;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.net.InetSocketAddress;
 import java.net.URI;
 import java.util.Map;
 
 public abstract class ReusableWebSocket {
-
-    private static final Logger log = LoggerFactory.getLogger(ReusableWebSocket.class);
 
     private DisposableSocket socket;
     private final URI serverUri;
@@ -66,11 +62,13 @@ public abstract class ReusableWebSocket {
         }
     }
 
+    @SuppressWarnings("unused")
     public URI getServerUri() {
         return this.serverUri;
     }
 
     //will return null if there is no connection
+    @SuppressWarnings("unused")
     public InetSocketAddress getRemoteSocketAddress() {
         return socket.getRemoteSocketAddress();
     }
@@ -98,6 +96,7 @@ public abstract class ReusableWebSocket {
         isUsed = true;
     }
 
+    @SuppressWarnings("unused")
     public void connectBlocking() throws InterruptedException {
         if (socket == null || isUsed) socket = new DisposableSocket(serverUri, draft, headers, connectTimeout);
         socket.setConnectionLostTimeout(heartbeatTimeout);
@@ -110,16 +109,19 @@ public abstract class ReusableWebSocket {
             socket.close();
     }
 
+    @SuppressWarnings("unused")
     public void close(int code) {
         if (socket != null)
             socket.close(code);
     }
 
+    @SuppressWarnings("unused")
     public void close(int code, String reason) {
         if (socket != null)
             socket.close(code, reason);
     }
 
+    @SuppressWarnings("unused")
     public void setHeartbeatTimeout(int seconds) {
         heartbeatTimeout = seconds;
         socket.setConnectionLostTimeout(seconds);
@@ -133,8 +135,8 @@ public abstract class ReusableWebSocket {
         }
 
         @Override
-        public void onOpen(ServerHandshake handshakedata) {
-            instance.onOpen(handshakedata);
+        public void onOpen(ServerHandshake handshakeData) {
+            instance.onOpen(handshakeData);
         }
 
         @Override

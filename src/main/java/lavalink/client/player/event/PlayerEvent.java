@@ -33,6 +33,6 @@ public abstract class PlayerEvent {
     }
 
     public IPlayer getPlayer() {
-        return player;
+        return this.player;
     }
 }

@@ -30,16 +30,15 @@ import java.util.List;
 public class ReconnectTask implements Runnable {
 
     private static final Logger log = LoggerFactory.getLogger(ReconnectTask.class);
-    private Lavalink lavalink;
+    private final Lavalink<? extends Link> lavalink;
 
-    ReconnectTask(Lavalink lavalink) {
+    ReconnectTask(Lavalink<? extends Link> lavalink) {
         this.lavalink = lavalink;
     }
 
     @Override
     public void run() {
         try {
-            //noinspection unchecked
             List<LavalinkSocket> nodes = lavalink.getNodes();
             nodes.forEach(lavalinkSocket -> {
                 if (lavalinkSocket.isClosed()

@@ -33,16 +33,20 @@ public interface IPlayer {
 
     void stopTrack();
 
+    @SuppressWarnings("unused")
     void setPaused(boolean b);
 
     boolean isPaused();
 
     long getTrackPosition();
 
+    @SuppressWarnings("unused")
     void seekTo(long position);
 
+    @SuppressWarnings("unused")
     void setVolume(int volume);
 
+    @SuppressWarnings("unused")
     int getVolume();
 
     void addListener(IPlayerEventListener listener);

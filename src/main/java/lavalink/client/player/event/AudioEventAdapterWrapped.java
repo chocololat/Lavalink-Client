@@ -32,6 +32,7 @@ import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
  * A lavaplayer AudioEventAdapter that is also an IPlayerEventListener.
  * This is used for abstracting between Lavaplayer and Lavalink
  */
+@SuppressWarnings("unused")
 public abstract class AudioEventAdapterWrapped extends AudioEventAdapter implements IPlayerEventListener {
 
     private AudioPlayer player;
@@ -49,7 +50,7 @@ public abstract class AudioEventAdapterWrapped extends AudioEventAdapter impleme
             onEvent(new com.sedmelluq.discord.lavaplayer.player.event.TrackEndEvent(player,
                     ((TrackEndEvent) event).getTrack(),
                     ((TrackEndEvent) event).getReason()
-                    ));
+            ));
         } else if (event instanceof TrackExceptionEvent) {
             Exception e = ((TrackExceptionEvent) event).getException();
             FriendlyException fe = e instanceof FriendlyException

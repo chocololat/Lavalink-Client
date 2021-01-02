@@ -19,7 +19,7 @@ public class JdaLink extends Link {
     private static final Logger log = LoggerFactory.getLogger(JdaLink.class);
     private final JdaLavalink lavalink;
 
-    JdaLink(JdaLavalink lavalink, String guildId) {
+    JdaLink(JdaLavalink lavalink, long guildId) {
         super(lavalink, guildId);
         this.lavalink = lavalink;
     }
@@ -35,7 +35,7 @@ public class JdaLink extends Link {
      */
     @SuppressWarnings("WeakerAccess")
     void connect(@NonNull VoiceChannel channel, boolean checkChannel) {
-        if (!channel.getGuild().equals(getJda().getGuildById(guild)))
+        if (!channel.getGuild().equals(getJda().getGuildById(guildId)))
             throw new IllegalArgumentException("The provided VoiceChannel is not a part of the Guild that this AudioManager handles." +
                     "Please provide a VoiceChannel from the proper Guild");
         if (channel.getJDA().isUnavailable(channel.getGuild().getIdLong()))
@@ -70,7 +70,7 @@ public class JdaLink extends Link {
     @SuppressWarnings("WeakerAccess")
     @NonNull
     public JDA getJda() {
-        return lavalink.getJdaFromSnowflake(String.valueOf(guild));
+        return lavalink.getJdaFromSnowflake(String.valueOf(guildId));
     }
 
     @Override
@@ -80,12 +80,12 @@ public class JdaLink extends Link {
 
     @Override
     protected void queueAudioDisconnect() {
-        Guild g = getJda().getGuildById(guild);
+        Guild g = getJda().getGuildById(guildId);
 
         if (g != null) {
             getJda().getDirectAudioController().disconnect(g);
         } else {
-            log.warn("Attempted to disconnect, but guild {} was not found", guild);
+            log.warn("Attempted to disconnect, but guild {} was not found", guildId);
         }
     }
 
@@ -105,6 +105,6 @@ public class JdaLink extends Link {
     @SuppressWarnings({"WeakerAccess", "unused"})
     @Nullable
     public Guild getGuild() {
-        return getJda().getGuildById(guild);
+        return getJda().getGuildById(guildId);
     }
 }

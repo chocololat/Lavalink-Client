@@ -49,7 +49,7 @@ public abstract class Lavalink<T extends Link> {
     /** User id may be set at a later time */
     @Nullable
     private String userId;
-    private final ConcurrentHashMap<String, T> links = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Long, T> links = new ConcurrentHashMap<>();
     final List<LavalinkSocket> nodes = new CopyOnWriteArrayList<>();
     final LavalinkLoadBalancer loadBalancer = new LavalinkLoadBalancer(this);
 
@@ -129,13 +129,13 @@ public abstract class Lavalink<T extends Link> {
 
     @SuppressWarnings("WeakerAccess")
     @NonNull
-    public T getLink(@NonNull String guildId) {
+    public T getLink(long guildId) {
         return links.computeIfAbsent(guildId, __ -> buildNewLink(guildId));
     }
 
     @SuppressWarnings("WeakerAccess")
     @Nullable
-    public T getExistingLink(@NonNull String guildId) {
+    public T getExistingLink(long guildId) {
         return links.get(guildId);
     }
 
@@ -146,7 +146,7 @@ public abstract class Lavalink<T extends Link> {
      * @param guildId the associated guild's ID
      * @return the new link
      */
-    protected abstract T buildNewLink(String guildId);
+    protected abstract T buildNewLink(long guildId);
 
     @SuppressWarnings({"WeakerAccess", "unused"})
     public int getNumShards() {
@@ -188,7 +188,7 @@ public abstract class Lavalink<T extends Link> {
     }
 
     @SuppressWarnings("WeakerAccess")
-    protected Map<String, T> getLinksMap() {
+    protected Map<Long, T> getLinksMap() {
         return links;
     }
 

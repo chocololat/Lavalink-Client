@@ -29,10 +29,12 @@ import com.sedmelluq.discord.lavaplayer.track.playback.AudioFrame;
 import com.sedmelluq.discord.lavaplayer.track.playback.MutableAudioFrame;
 import lavalink.client.player.event.IPlayerEventListener;
 
+@SuppressWarnings("unused")
 public class LavaplayerPlayerWrapper implements IPlayer {
 
     private final AudioPlayer player;
 
+    @SuppressWarnings("unused")
     public LavaplayerPlayerWrapper(AudioPlayer player) {
         this.player = player;
     }

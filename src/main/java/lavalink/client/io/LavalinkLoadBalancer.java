@@ -32,11 +32,11 @@ import java.util.List;
 @SuppressWarnings("WeakerAccess")
 public class LavalinkLoadBalancer {
 
-    private Lavalink lavalink;
+    private final Lavalink<? extends Link> lavalink;
     //private Map<String, Optional<LavalinkSocket>> socketMap = new ConcurrentHashMap<>();
-    private List<PenaltyProvider> penaltyProviders = new ArrayList<>();
+    private final List<PenaltyProvider> penaltyProviders = new ArrayList<>();
 
-    LavalinkLoadBalancer(Lavalink lavalink) {
+    LavalinkLoadBalancer(Lavalink<? extends Link> lavalink) {
         this.lavalink = lavalink;
     }
 
@@ -45,7 +45,6 @@ public class LavalinkLoadBalancer {
         LavalinkSocket leastPenalty = null;
         int record = Integer.MAX_VALUE;
 
-        @SuppressWarnings("unchecked")
         List<LavalinkSocket> nodes = lavalink.getNodes();
         for (LavalinkSocket socket : nodes) {
             int total = getPenalties(socket, guild, penaltyProviders).getTotal();
@@ -72,16 +71,14 @@ public class LavalinkLoadBalancer {
     }
 
     void onNodeDisconnect(LavalinkSocket disconnected) {
-        //noinspection unchecked
-        Collection<Link> links = lavalink.getLinks();
+        Collection<? extends Link> links = lavalink.getLinks();
         links.forEach(link -> {
             if (disconnected.equals(link.getNode(false)))
-                link.changeNode(lavalink.loadBalancer.determineBestSocket(link.getGuildIdLong()));
+                link.changeNode(lavalink.loadBalancer.determineBestSocket(link.getGuildId()));
         });
     }
 
     void onNodeConnect(LavalinkSocket connected) {
-        @SuppressWarnings("unchecked")
         List<LavalinkSocket> sockets = lavalink.getNodes();
         long otherAvailableNodes = sockets.stream()
                 .filter(node -> node != connected)
@@ -90,8 +87,7 @@ public class LavalinkLoadBalancer {
         if (otherAvailableNodes > 0) { //only update links if this is the only connected node
             return;
         }
-        @SuppressWarnings("unchecked")
-        Collection<Link> links = lavalink.getLinks();
+        Collection<? extends Link> links = lavalink.getLinks();
         links.forEach(link -> {
             if (link.getNode(false) == null)
                 link.changeNode(connected);
@@ -110,16 +106,16 @@ public class LavalinkLoadBalancer {
     @SuppressWarnings("unused")
     public static class Penalties {
 
-        private LavalinkSocket socket;
+        private final LavalinkSocket socket;
         private final long guild;
         private int playerPenalty = 0;
         private int cpuPenalty = 0;
         private int deficitFramePenalty = 0;
         private int nullFramePenalty = 0;
         private int customPenalties = 0;
-        private final Lavalink lavalink;
+        private final Lavalink<? extends Link> lavalink;
 
-        private Penalties(LavalinkSocket socket, long guild, List<PenaltyProvider> penaltyProviders, Lavalink lavalink) {
+        private Penalties(LavalinkSocket socket, long guild, List<PenaltyProvider> penaltyProviders, Lavalink<? extends Link> lavalink) {
             this.lavalink = lavalink;
             this.socket = socket;
             this.guild = guild;
@@ -147,15 +143,14 @@ public class LavalinkLoadBalancer {
         }
 
         private int countPlayingPlayers() {
-            //noinspection unchecked
-            Collection<Link> links = lavalink.getLinks();
-            Long players = links
+            Collection<? extends Link> links = lavalink.getLinks();
+            long players = links
                     .stream().filter(link ->
                             socket.equals(link.getNode(false)) &&
                                     link.getPlayer().getPlayingTrack() != null &&
                                     !link.getPlayer().isPaused())
                     .count();
-            return players.intValue();
+            return (int) players;
         }
 
         public LavalinkSocket getSocket() {

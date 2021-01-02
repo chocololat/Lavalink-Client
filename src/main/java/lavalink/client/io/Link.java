@@ -39,16 +39,16 @@ abstract public class Link {
     private JSONObject lastVoiceServerUpdate = null;
     private String lastSessionId = null;
     private final Lavalink<?> lavalink;
-    protected final long guild;
+    protected final long guildId;
     private LavalinkPlayer player;
-    private volatile String channel = null;
+    private volatile long channelId = -1;
     private volatile LavalinkSocket node = null;
     /* May only be set by setState() */
     private volatile State state = State.NOT_CONNECTED;
 
-    protected Link(Lavalink<?> lavalink, String guildId) {
+    protected Link(Lavalink<?> lavalink, long guildId) {
         this.lavalink = lavalink;
-        this.guild = Long.parseLong(guildId);
+        this.guildId = guildId;
     }
 
     public LavalinkPlayer getPlayer() {
@@ -63,6 +63,7 @@ abstract public class Link {
         return lavalink;
     }
 
+    @SuppressWarnings({"unused"})
     public LavalinkRestClient getRestClient() {
         final LavalinkSocket node = getNode(true);
         if (node == null) throw new IllegalStateException("No available nodes!");
@@ -75,12 +76,8 @@ abstract public class Link {
         player = null;
     }
 
-    public String getGuildId() {
-        return Long.toString(guild);
-    }
-
-    public long getGuildIdLong() {
-        return guild;
+    public long getGuildId() {
+        return guildId;
     }
 
     /**
@@ -110,7 +107,7 @@ abstract public class Link {
         if (socket != null && state != State.DESTROYING && state != State.DESTROYED) {
             socket.send(new JSONObject()
                     .put("op", "destroy")
-                    .put("guildId", Long.toString(guild))
+                    .put("guildId", Long.toString(guildId))
                     .toString());
             node = null;
         }
@@ -139,7 +136,7 @@ abstract public class Link {
         if (socket != null) {
             socket.send(new JSONObject()
                     .put("op", "destroy")
-                    .put("guildId", Long.toString(guild))
+                    .put("guildId", Long.toString(guildId))
                     .toString());
         }
     }
@@ -165,7 +162,7 @@ abstract public class Link {
     @SuppressWarnings("WeakerAccess")
     public LavalinkSocket getNode(boolean selectIfAbsent) {
         if (selectIfAbsent && node == null) {
-            node = lavalink.loadBalancer.determineBestSocket(guild);
+            node = lavalink.loadBalancer.determineBestSocket(guildId);
             if (player != null) player.onNodeChange();
         }
         return node;
@@ -175,19 +172,18 @@ abstract public class Link {
      * @return The channel we are currently connect to
      */
     @SuppressWarnings({"WeakerAccess", "unused"})
-    @Nullable
-    public String getChannel() {
-        if (channel == null || state == State.DESTROYED || state == State.NOT_CONNECTED) return null;
+    public long getChannelId() {
+        if (channelId == -1 || state == State.DESTROYED || state == State.NOT_CONNECTED) return -1;
 
-        return channel;
+        return channelId;
     }
 
     /**
      * @return The channel we are currently connected to, or which we were connected to
      */
-    @Nullable
-    public String getLastChannel() {
-        return channel;
+    @SuppressWarnings({"unused"})
+    public long getLastChannelId() {
+        return channelId;
     }
 
     /**
@@ -211,16 +207,16 @@ abstract public class Link {
     /**
      * Invoked when we receive a voice state update from Discord, which tells us we have joined a channel
      */
-
-    public void setChannel(@NonNull String channel) {
-        this.channel = channel;
+    public void setChannelId(long channelId) {
+        this.channelId = channelId;
     }
+
 
     @Override
     public String toString() {
         return "Link{" +
-                "guild='" + guild + '\'' +
-                ", channel='" + channel + '\'' +
+                "guild='" + guildId + '\'' +
+                ", channel='" + channelId + '\'' +
                 ", state=" + state +
                 '}';
     }
@@ -233,7 +229,7 @@ abstract public class Link {
         JSONObject out = new JSONObject();
         out.put("op", "voiceUpdate");
         out.put("sessionId", sessionId);
-        out.put("guildId", Long.toString(guild));
+        out.put("guildId", Long.toString(guildId));
         out.put("event", lastVoiceServerUpdate);
 
         //noinspection ConstantConditions
