@@ -35,8 +35,6 @@ targetCompatibility = 1.8
 
 repositories {
     jcenter()
-    mavenCentral()
-    maven { url 'https://jitpack.io' }
 }
 
 
@@ -62,7 +60,7 @@ ext {
 
 
 dependencies {
-    compile group: 'com.sedmelluq:lavaplayer', name: 'lavaplayer', version: lavaplayerVersion
+    compile group: 'com.sedmelluq', name: 'lavaplayer', version: lavaplayerVersion
     compile group: 'org.java-websocket', name: 'Java-WebSocket', version: javaWebSocketVersion
     compile group: 'org.slf4j', name: 'slf4j-api', version: slf4jVersion
     compile group: 'org.json', name: 'json', version: jsonOrgVersion
