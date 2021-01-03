@@ -86,7 +86,7 @@ public class LavalinkPlayer implements IPlayer {
 
             JSONObject json = new JSONObject();
             json.put("op", "play");
-            json.put("guildId", link.getGuildId());
+            json.put("guildId",  Long.toString(link.getGuildId()));
             json.put("track", LavalinkUtil.toMessage(track));
             json.put("startTime", position);
             if (trackData != null) {
@@ -112,7 +112,7 @@ public class LavalinkPlayer implements IPlayer {
         if (node == null) return;
         JSONObject json = new JSONObject();
         json.put("op", "stop");
-        json.put("guildId", link.getGuildId());
+        json.put("guildId",  Long.toString(link.getGuildId()));
         node.send(json.toString());
     }
 
@@ -123,7 +123,7 @@ public class LavalinkPlayer implements IPlayer {
         if (node != null) {
             JSONObject json = new JSONObject();
             json.put("op", "pause");
-            json.put("guildId", link.getGuildId());
+            json.put("guildId",  Long.toString(link.getGuildId()));
             json.put("pause", pause);
             node.send(json.toString());
         }
@@ -162,7 +162,7 @@ public class LavalinkPlayer implements IPlayer {
 
         JSONObject json = new JSONObject();
         json.put("op", "seek");
-        json.put("guildId", link.getGuildId());
+        json.put("guildId",  Long.toString(link.getGuildId()));
         json.put("position", position);
         //noinspection ConstantConditions
         link.getNode(true).send(json.toString());
@@ -235,7 +235,7 @@ public class LavalinkPlayer implements IPlayer {
 
         JSONObject json = new JSONObject();
         json.put("op", "filters");
-        json.put("guildId", link.getGuildId());
+        json.put("guildId",  Long.toString(link.getGuildId()));
 
         // Volume
         json.put("volume", filters.getVolume());
