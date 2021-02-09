@@ -45,6 +45,7 @@ public class LavalinkPlayer implements IPlayer {
     private long position = -1;
     /** Lazily initialized */
     private Filters filters = null;
+    private boolean connected = false;
 
     private final Link link;
     private final List<IPlayerEventListener> listeners = new CopyOnWriteArrayList<>();
@@ -204,6 +205,7 @@ public class LavalinkPlayer implements IPlayer {
     public void provideState(JSONObject json) {
         updateTime = json.getLong("time");
         position = json.optLong("position", 0);
+        connected = json.optBoolean("connected", true);
     }
 
     @Override
@@ -288,7 +290,34 @@ public class LavalinkPlayer implements IPlayer {
             json.put("vibrato", obj);
         }
 
+        Rotation rotation = filters.getRotation();
+        if (rotation != null) {
+            JSONObject obj = new JSONObject();
+            obj.put("rotationHz", rotation.getFrequency());
+            json.put("rotation", obj);
+        }
+
+        Distortion distortion = filters.getDistortion();
+        if (distortion != null) {
+            JSONObject obj = new JSONObject();
+            obj.put("sinOffset", distortion.getSinOffset());
+            obj.put("sinScale", distortion.getSinScale());
+            obj.put("cosOffset", distortion.getCosOffset());
+            obj.put("cosScale", distortion.getCosScale());
+            obj.put("tanOffset", distortion.getTanOffset());
+            obj.put("tanScale", distortion.getTanScale());
+            obj.put("offset", distortion.getOffset());
+            obj.put("offset", distortion.getOffset());
+            json.put("distortion", obj);
+        }
+
         node.send(json.toString());
     }
 
+    /**
+     * @return Whether or not the Lavalink player is connected to the gateway
+     */
+    public boolean isConnected() {
+        return connected;
+    }
 }
