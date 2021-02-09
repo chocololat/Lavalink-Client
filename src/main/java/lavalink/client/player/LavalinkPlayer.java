@@ -177,7 +177,7 @@ public class LavalinkPlayer implements IPlayer {
     @Deprecated
     public void setVolume(int volume) {
         if (filters == null && volume == 100) return;
-        getFilters().setVolume((float)volume / 100).commit();
+        getFilters().setVolume(volume / 100f).commit();
     }
 
     /**
