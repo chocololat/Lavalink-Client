@@ -24,7 +24,7 @@ public class Tremolo {
 
     @CheckReturnValue
     public Tremolo setDepth(float depth) {
-        if (depth <= 0 || depth >= 1) throw new IllegalArgumentException("Frequency must be >0 and <=1");
+        if (depth <= 0 || depth > 1) throw new IllegalArgumentException("Frequency must be >0 and <=1");
         this.depth = depth;
         return this;
     }
