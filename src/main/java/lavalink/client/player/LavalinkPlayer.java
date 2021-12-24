@@ -23,6 +23,7 @@
 package lavalink.client.player;
 
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
+import lavalink.client.LavalinkTrack;
 import lavalink.client.LavalinkUtil;
 import lavalink.client.io.LavalinkSocket;
 import lavalink.client.io.Link;
@@ -89,7 +90,7 @@ public class LavalinkPlayer implements IPlayer {
             JSONObject json = new JSONObject();
             json.put("op", "play");
             json.put("guildId", link.getGuildId());
-            json.put("track", LavalinkUtil.toMessage(track));
+            json.put("track", LavalinkTrack.encode(track));
             json.put("startTime", position);
             if (trackData != null) {
                 json.put("startTime", trackData.startPos);

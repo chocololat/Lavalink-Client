@@ -130,7 +130,7 @@ class LavalinkTest {
             ArrayList<AudioTrack> list = new ArrayList<>();
             trackData.forEach(o -> {
                 try {
-                    list.add(LavalinkUtil.toAudioTrack(((JSONObject) o).getString("track")));
+                    list.add(LavalinkTrack.decode(((JSONObject) o).getString("track")));
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
