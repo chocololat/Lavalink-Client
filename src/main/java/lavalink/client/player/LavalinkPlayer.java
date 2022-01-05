@@ -90,7 +90,7 @@ public class LavalinkPlayer implements IPlayer {
             JSONObject json = new JSONObject();
             json.put("op", "play");
             json.put("guildId",  Long.toString(link.getGuildId()));
-            json.put("track", LavalinkUtil.toMessage(track));
+            json.put("track", LavalinkTrack.encode(track));
             json.put("startTime", position);
             if (trackData != null) {
                 json.put("startTime", trackData.startPos);
