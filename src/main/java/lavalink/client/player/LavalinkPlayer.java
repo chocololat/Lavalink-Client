@@ -23,6 +23,7 @@
 package lavalink.client.player;
 
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
+import lavalink.client.LavalinkTrack;
 import lavalink.client.LavalinkUtil;
 import lavalink.client.io.LavalinkSocket;
 import lavalink.client.io.Link;
@@ -169,6 +170,8 @@ public class LavalinkPlayer implements IPlayer {
         json.put("position", position);
         //noinspection ConstantConditions
         link.getNode(true).send(json.toString());
+        
+        this.position = position;
     }
 
     /**
@@ -186,7 +189,7 @@ public class LavalinkPlayer implements IPlayer {
 
         JSONObject json = new JSONObject();
         json.put("op", "volume");
-        json.put("guildId", link.getGuildId());
+        json.put("guildId", String.valueOf(link.getGuildId()));
         json.put("volume", volume);
         node.send(json.toString());
     }

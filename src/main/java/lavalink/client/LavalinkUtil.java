@@ -42,20 +42,6 @@ import java.util.Base64;
 
 public class LavalinkUtil {
 
-    private static final AudioPlayerManager PLAYER_MANAGER;
-
-    static {
-        PLAYER_MANAGER = new DefaultAudioPlayerManager();
-
-        /* These are only to encode/decode messages */
-        PLAYER_MANAGER.registerSourceManager(new YoutubeAudioSourceManager());
-        PLAYER_MANAGER.registerSourceManager(new BandcampAudioSourceManager());
-        PLAYER_MANAGER.registerSourceManager(SoundCloudAudioSourceManager.createDefault());
-        PLAYER_MANAGER.registerSourceManager(new TwitchStreamAudioSourceManager());
-        PLAYER_MANAGER.registerSourceManager(new VimeoAudioSourceManager());
-        PLAYER_MANAGER.registerSourceManager(new HttpAudioSourceManager());
-    }
-
     /**
      *
      * @param player the lavalink player that holds the track with data
@@ -65,7 +51,7 @@ public class LavalinkUtil {
      */
     public static AudioTrack toAudioTrackWithData(LavalinkPlayer player, String message) throws IOException{
         AudioTrack storedTrack = player.getPlayingTrack();
-        AudioTrack messageTrack = toAudioTrack(message);
+        AudioTrack messageTrack = LavalinkTrack.decode(message);
 
         if (storedTrack != null && storedTrack.getUserData() != null) {
             messageTrack.setUserData(storedTrack.getUserData());
@@ -74,55 +60,9 @@ public class LavalinkUtil {
         return messageTrack;
     }
 
-    /**
-     *
-     * @param message the Base64 audio track
-     * @return the AudioTrack
-     * @throws IOException if there is an IO problem
-     */
-    public static AudioTrack toAudioTrack(String message) throws IOException {
-        return toAudioTrack(Base64.getDecoder().decode(message));
-    }
-
-    /**
-     * @param message the unencoded audio track
-     * @return the AudioTrack
-     * @throws IOException if there is an IO problem
-     */
-    @SuppressWarnings("WeakerAccess")
-    public static AudioTrack toAudioTrack(byte[] message) throws IOException {
-        ByteArrayInputStream bais = new ByteArrayInputStream(message);
-        return PLAYER_MANAGER.decodeTrack(new MessageInput(bais)).decodedTrack;
-    }
-
-    /**
-     * @param track the track to serialize
-     * @return the serialized track a Base64 string
-     * @throws IOException if there is an IO problem
-     */
-    public static String toMessage(AudioTrack track) throws IOException {
-        return Base64.getEncoder().encodeToString(toBinary(track));
-    }
-
-    /**
-     * @param track the track to serialize
-     * @return the serialized track as binary
-     * @throws IOException if there is an IO problem
-     */
-    @SuppressWarnings("WeakerAccess")
-    public static byte[] toBinary(AudioTrack track) throws IOException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PLAYER_MANAGER.encodeTrack(new MessageOutput(baos), track);
-        return baos.toByteArray();
-    }
 
     public static int getShardFromSnowflake(String snowflake, int numShards) {
         return (int) ((Long.parseLong(snowflake) >> 22) % numShards);
-    }
-
-    @SuppressWarnings("unused")
-    public static AudioPlayerManager getPlayerManager() {
-        return PLAYER_MANAGER;
     }
 
 }
