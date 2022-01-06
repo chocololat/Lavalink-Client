@@ -22,82 +22,82 @@
 
 package lavalink.client.player.event;
 
-import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
-import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
 import lavalink.client.player.IPlayer;
+import lavalink.client.player.track.Track;
+import lavalink.client.player.track.TrackEndReason;
 
 public class PlayerEventListenerAdapter implements IPlayerEventListener {
 
-    /**
-     * @param player Audio player
-     */
-    @SuppressWarnings("unused")
-    public void onPlayerPause(IPlayer player) {
-        // Adapter dummy method
-    }
+	/**
+	 * @param player Audio player
+	 */
+	@SuppressWarnings("unused")
+	public void onPlayerPause(IPlayer player) {
+		// Adapter dummy method
+	}
 
-    /**
-     * @param player Audio player
-     */
-    @SuppressWarnings("unused")
-    public void onPlayerResume(IPlayer player) {
-        // Adapter dummy method
-    }
+	/**
+	 * @param player Audio player
+	 */
+	@SuppressWarnings("unused")
+	public void onPlayerResume(IPlayer player) {
+		// Adapter dummy method
+	}
 
-    /**
-     * @param player Audio player
-     * @param track Audio track that started
-     */
-    @SuppressWarnings("unused")
-    public void onTrackStart(IPlayer player, AudioTrack track) {
-        // Adapter dummy method
-    }
+	/**
+	 * @param player Audio player
+	 * @param track  Audio track that started
+	 */
+	@SuppressWarnings("unused")
+	public void onTrackStart(IPlayer player, Track track) {
+		// Adapter dummy method
+	}
 
-    /**
-     * @param player Audio player
-     * @param track Audio track that ended
-     * @param endReason The reason why the track stopped playing
-     */
-    @SuppressWarnings("unused")
-    public void onTrackEnd(IPlayer player, AudioTrack track, AudioTrackEndReason endReason) {
-        // Adapter dummy method
-    }
+	/**
+	 * @param player    Audio player
+	 * @param track     Audio track that ended
+	 * @param endReason The reason why the track stopped playing
+	 */
+	@SuppressWarnings("unused")
+	public void onTrackEnd(IPlayer player, Track track, TrackEndReason endReason) {
+		// Adapter dummy method
+	}
 
-    /**
-     * @param player Audio player
-     * @param track Audio track where the exception occurred
-     * @param exception The exception that occurred
-     */
-    @SuppressWarnings("unused")
-    public void onTrackException(IPlayer player, AudioTrack track, Exception exception) {
-        // Adapter dummy method
-    }
+	/**
+	 * @param player    Audio player
+	 * @param track     Audio track where the exception occurred
+	 * @param exception The exception that occurred
+	 */
+	@SuppressWarnings("unused")
+	public void onTrackException(IPlayer player, Track track, Exception exception) {
+		// Adapter dummy method
+	}
 
-    /**
-     * @param player Audio player
-     * @param track Audio track where the exception occurred
-     * @param thresholdMs The wait threshold that was exceeded for this event to trigger
-     */
-    @SuppressWarnings("unused")
-    public void onTrackStuck(IPlayer player, AudioTrack track, long thresholdMs) {
-        // Adapter dummy method
-    }
+	/**
+	 * @param player      Audio player
+	 * @param track       Audio track where the exception occurred
+	 * @param thresholdMs The wait threshold that was exceeded for this event to trigger
+	 */
+	@SuppressWarnings("unused")
+	public void onTrackStuck(IPlayer player, Track track, long thresholdMs) {
+		// Adapter dummy method
+	}
 
 
-    @Override
-    public void onEvent(PlayerEvent event) {
-        if (event instanceof PlayerPauseEvent) {
-            onPlayerPause(event.getPlayer());
-        } else if (event instanceof PlayerResumeEvent) {
-            onPlayerResume(event.getPlayer());
-        } else if (event instanceof TrackStartEvent) {
-            onTrackStart(event.getPlayer(), ((TrackStartEvent) event).getTrack());
-        } else if (event instanceof TrackEndEvent) {
-            onTrackEnd(event.getPlayer(), ((TrackEndEvent) event).getTrack(), ((TrackEndEvent) event).getReason());
-        } else if (event instanceof TrackExceptionEvent) {
-            onTrackException(event.getPlayer(), ((TrackExceptionEvent) event).getTrack(), ((TrackExceptionEvent) event).getException());
-        } else if (event instanceof TrackStuckEvent) {
-            onTrackStuck(event.getPlayer(), ((TrackStuckEvent) event).getTrack(), ((TrackStuckEvent) event).getThresholdMs());
-        }
-    }
+	@Override
+	public void onEvent(PlayerEvent event) {
+		if (event instanceof PlayerPauseEvent) {
+			onPlayerPause(event.getPlayer());
+		} else if (event instanceof PlayerResumeEvent) {
+			onPlayerResume(event.getPlayer());
+		} else if (event instanceof TrackStartEvent) {
+			onTrackStart(event.getPlayer(), ((TrackStartEvent) event).getTrack());
+		} else if (event instanceof TrackEndEvent) {
+			onTrackEnd(event.getPlayer(), ((TrackEndEvent) event).getTrack(), ((TrackEndEvent) event).getReason());
+		} else if (event instanceof TrackExceptionEvent) {
+			onTrackException(event.getPlayer(), ((TrackExceptionEvent) event).getTrack(), ((TrackExceptionEvent) event).getException());
+		} else if (event instanceof TrackStuckEvent) {
+			onTrackStuck(event.getPlayer(), ((TrackStuckEvent) event).getTrack(), ((TrackStuckEvent) event).getThresholdMs());
+		}
+	}
 }

@@ -2,7 +2,6 @@ package lavalink.client.io.jda;
 
 import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.Nullable;
-import lavalink.client.LavalinkUtil;
 import lavalink.client.io.Lavalink;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
@@ -97,7 +96,11 @@ public class JdaLavalink extends Lavalink<JdaLink> implements EventListener {
     @SuppressWarnings("WeakerAccess")
     @NonNull
     public JDA getJdaFromSnowflake(String snowflake) {
-        return getJda(LavalinkUtil.getShardFromSnowflake(snowflake, numShards));
+        return getJda(getShardFromSnowflake(snowflake, numShards));
+    }
+
+    public static int getShardFromSnowflake(String snowflake, int numShards) {
+        return (int) ((Long.parseLong(snowflake) >> 22) % numShards);
     }
 
     @SuppressWarnings("unused")

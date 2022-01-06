@@ -6,7 +6,7 @@ You can add the following to your POM if you're using Maven:
 ```xml
 <dependencies>
     <dependency>
-        <groupId>com.github.freyacodes</groupId>
+        <groupId>com.github.KittyBot-Org</groupId>
         <artifactId>Lavalink-Client</artifactId>
         <version>x.y.z</version>
     </dependency>
@@ -30,7 +30,7 @@ Or Gradle:
     }
 
     dependencies {
-        compile group: 'com.github.freyacodes', name: 'Lavalink-Client', version: 'x.y.z'
+        compile group: 'com.github.KittyBot-Org', name: 'Lavalink-Client', version: 'x.y.z'
     }
 ```
 

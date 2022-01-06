@@ -22,35 +22,37 @@
 
 package lavalink.client.player;
 
-import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import lavalink.client.player.event.IPlayerEventListener;
+import lavalink.client.player.track.Track;
 
 public interface IPlayer {
 
-    AudioTrack getPlayingTrack();
+	Track getPlayingTrack();
 
-    void playTrack(AudioTrack track);
+	void playTrack(Track track);
 
-    void stopTrack();
+	void playTrack(Track track, long startTime, long endTime);
 
-    @SuppressWarnings("unused")
-    void setPaused(boolean b);
+	void stopTrack();
 
-    boolean isPaused();
+	@SuppressWarnings("unused")
+	void setPaused(boolean b);
 
-    long getTrackPosition();
+	boolean isPaused();
 
-    @SuppressWarnings("unused")
-    void seekTo(long position);
+	long getTrackPosition();
 
-    @SuppressWarnings("unused")
-    void setVolume(int volume);
+	@SuppressWarnings("unused")
+	void seekTo(long position);
 
-    @SuppressWarnings("unused")
-    int getVolume();
+	@SuppressWarnings("unused")
+	void setVolume(int volume);
 
-    void addListener(IPlayerEventListener listener);
+	@SuppressWarnings("unused")
+	int getVolume();
 
-    void removeListener(IPlayerEventListener listener);
+	void addListener(IPlayerEventListener listener);
+
+	void removeListener(IPlayerEventListener listener);
 
 }

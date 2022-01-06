@@ -80,15 +80,6 @@ abstract public class Link {
         return guildId;
     }
 
-    /**
-     * @deprecated may cause unexpected reconnects and other strange behavior. Use {@link #destroy()} instead.
-     * Will be removed if we change the lifecycle of this class.
-     */
-    @Deprecated
-    public void disconnect() {
-        setState(State.DISCONNECTING);
-        queueAudioDisconnect();
-    }
 
     public void changeNode(LavalinkSocket newNode) {
         node = newNode;
