@@ -2,22 +2,19 @@ plugins {
     id "java"
     id "java-library"
     id "maven-publish"
-    id "com.github.johnrengelman.shadow" version "7.1.0"
+    id "com.github.johnrengelman.shadow" version "7.1.1"
 }
 
-group "com.githib"
+group "com.github"
 version "1.0.0"
 
-
 sourceCompatibility = 1.8
-targetCompatibility = 1.8
 compileJava.options.encoding = "UTF-8"
 
 repositories {
     mavenCentral()
     maven { url "https://m2.dv8tion.net/releases" }
     jcenter()
-
 }
 
 dependencies {
