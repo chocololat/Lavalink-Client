@@ -1,4 +1,4 @@
-# Lavalink Client [![Release](https://img.shields.io/github/tag/freyacodes/Lavalink-Client.svg)](https://jitpack.io/#freyacodes/Lavalink-Client)
+# Lavalink Client [![Release](https://img.shields.io/github/tag/KittyBot-Org/Lavalink-Client.svg)](https://jitpack.io/#KittyBot-Org/Lavalink-Client)
 This is a modified version of <https://github.com/freyacodes/Lavalink-Client> which does not depend on [lavaplayer](https://github.com/sedmelluq/lavaplayer). Therefore it's not compatible with lavaplayer in one codebase
 
 ## Installation
