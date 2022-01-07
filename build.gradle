@@ -24,7 +24,7 @@ dependencies {
     implementation "org.json:json:20211205"
     api "net.dv8tion:JDA:4.3.0_339"
     api "org.slf4j:slf4j-api:1.7.25"
-    api "com.github.spotbugs:spotbugs-annotations:4.5.2"
+    api "com.github.spotbugs:spotbugs-annotations:4.5.3"
     api "io.prometheus:simpleclient:0.14.1"
 }
 
