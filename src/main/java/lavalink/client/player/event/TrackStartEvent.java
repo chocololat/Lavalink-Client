@@ -22,19 +22,19 @@
 
 package lavalink.client.player.event;
 
-import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import lavalink.client.player.IPlayer;
+import lavalink.client.player.track.DefaultTrack;
 
 public class TrackStartEvent extends PlayerEvent {
 
-    private final AudioTrack track;
+	private final DefaultTrack track;
 
-    public TrackStartEvent(IPlayer player, AudioTrack track) {
-        super(player);
-        this.track = track;
-    }
+	public TrackStartEvent(IPlayer player, DefaultTrack track) {
+		super(player);
+		this.track = track;
+	}
 
-    public AudioTrack getTrack() {
-        return this.track;
-    }
+	public DefaultTrack getTrack() {
+		return this.track;
+	}
 }

@@ -22,25 +22,25 @@
 
 package lavalink.client.player.event;
 
-import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import lavalink.client.player.IPlayer;
+import lavalink.client.player.track.DefaultTrack;
 
 public class TrackStuckEvent extends PlayerEvent {
 
-    private final AudioTrack track;
-    private final long thresholdMs;
+	private final DefaultTrack track;
+	private final long thresholdMs;
 
-    public TrackStuckEvent(IPlayer player, AudioTrack track, long thresholdMs) {
-        super(player);
-        this.track = track;
-        this.thresholdMs = thresholdMs;
-    }
+	public TrackStuckEvent(IPlayer player, DefaultTrack track, long thresholdMs) {
+		super(player);
+		this.track = track;
+		this.thresholdMs = thresholdMs;
+	}
 
-    public AudioTrack getTrack() {
-        return this.track;
-    }
+	public DefaultTrack getTrack() {
+		return this.track;
+	}
 
-    public long getThresholdMs() {
-        return this.thresholdMs;
-    }
+	public long getThresholdMs() {
+		return this.thresholdMs;
+	}
 }

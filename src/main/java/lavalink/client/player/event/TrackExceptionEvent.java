@@ -22,25 +22,25 @@
 
 package lavalink.client.player.event;
 
-import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import lavalink.client.player.IPlayer;
+import lavalink.client.player.track.DefaultTrack;
 
 public class TrackExceptionEvent extends PlayerEvent {
 
-    private final AudioTrack track;
-    private final Exception exception;
+	private final DefaultTrack track;
+	private final Exception exception;
 
-    public TrackExceptionEvent(IPlayer player, AudioTrack track, Exception exception) {
-        super(player);
-        this.track = track;
-        this.exception = exception;
-    }
+	public TrackExceptionEvent(IPlayer player, DefaultTrack track, Exception exception) {
+		super(player);
+		this.track = track;
+		this.exception = exception;
+	}
 
-    public AudioTrack getTrack() {
-        return this.track;
-    }
+	public DefaultTrack getTrack() {
+		return this.track;
+	}
 
-    public Exception getException() {
-        return this.exception;
-    }
+	public Exception getException() {
+		return this.exception;
+	}
 }

@@ -22,26 +22,26 @@
 
 package lavalink.client.player.event;
 
-import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
-import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
+import lavalink.client.player.track.TrackEndReason;
 import lavalink.client.player.IPlayer;
+import lavalink.client.player.track.DefaultTrack;
 
 public class TrackEndEvent extends PlayerEvent {
 
-    private final AudioTrack track;
-    private final AudioTrackEndReason reason;
+	private final DefaultTrack track;
+	private final TrackEndReason reason;
 
-    public TrackEndEvent(IPlayer player, AudioTrack track, AudioTrackEndReason reason) {
-        super(player);
-        this.track = track;
-        this.reason = reason;
-    }
+	public TrackEndEvent(IPlayer player, DefaultTrack track, TrackEndReason reason) {
+		super(player);
+		this.track = track;
+		this.reason = reason;
+	}
 
-    public AudioTrack getTrack() {
-        return this.track;
-    }
+	public DefaultTrack getTrack() {
+		return this.track;
+	}
 
-    public AudioTrackEndReason getReason() {
-        return this.reason;
-    }
+	public TrackEndReason getReason() {
+		return this.reason;
+	}
 }
