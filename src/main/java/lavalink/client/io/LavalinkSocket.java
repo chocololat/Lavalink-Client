@@ -132,10 +132,10 @@ public class LavalinkSocket extends ReusableWebSocket {
 				event = new TrackStartEvent(player, new DefaultTrack(json.getString("track"), player.getPlayingTrack()));
 				break;
 			case "TrackEndEvent":
-				player.clearTrack();
 				event = new TrackEndEvent(player, new DefaultTrack(json.getString("track"), player.getPlayingTrack()),
 						TrackEndReason.valueOf(json.getString("reason"))
 				);
+				player.clearTrack();
 				break;
 			case "TrackExceptionEvent":
 				Exception ex;
