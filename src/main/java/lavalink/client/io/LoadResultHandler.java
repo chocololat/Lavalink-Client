@@ -1,7 +1,7 @@
 package lavalink.client.io;
 
-import lavalink.client.player.track.Playlist;
-import lavalink.client.player.track.Track;
+import lavalink.client.player.track.AudioPlaylist;
+import lavalink.client.player.track.AudioTrack;
 
 import java.util.List;
 
@@ -11,21 +11,21 @@ public interface LoadResultHandler {
 	 *
 	 * @param track The loaded track
 	 */
-	void trackLoaded(Track track);
+	void trackLoaded(AudioTrack track);
 
 	/**
 	 * Called when the requested item is a playlist and it was successfully loaded.
 	 *
 	 * @param playlist The loaded playlist
 	 */
-	void playlistLoaded(Playlist playlist);
+	void playlistLoaded(AudioPlaylist playlist);
 
 	/**
 	 * Called when the requested item is a search result and it was successfully loaded.
 	 *
 	 * @param tracks The loaded tracks from the search
 	 */
-	void searchResultLoaded(List<Track> tracks);
+	void searchResultLoaded(List<AudioTrack> tracks);
 
 	/**
 	 * Called when there were no items found by the specified identifier.

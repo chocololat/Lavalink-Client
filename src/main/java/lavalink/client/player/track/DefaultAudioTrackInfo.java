@@ -2,7 +2,7 @@ package lavalink.client.player.track;
 
 import org.json.JSONObject;
 
-public class DefaultTrackInfo implements TrackInfo {
+public class DefaultAudioTrackInfo implements AudioTrackInfo {
 
 	private final String title;
 	private final String author;
@@ -12,7 +12,7 @@ public class DefaultTrackInfo implements TrackInfo {
 	private final String uri;
 	private final String sourceName;
 
-	public DefaultTrackInfo(String title, String author, long length, String identifier, boolean isStream, String uri, String sourceName) {
+	public DefaultAudioTrackInfo(String title, String author, long length, String identifier, boolean isStream, String uri, String sourceName) {
 		this.title = title;
 		this.author = author;
 		this.length = length;
@@ -22,8 +22,8 @@ public class DefaultTrackInfo implements TrackInfo {
 		this.sourceName = sourceName;
 	}
 
-	public static TrackInfo fromJSON(JSONObject json) {
-		return new DefaultTrackInfo(json.getString("title"), json.getString("author"), json.getLong("length"), json.getString("identifier"), json.getBoolean("isStream"), json.getString("uri"), json.getString("sourceName"));
+	public static AudioTrackInfo fromJSON(JSONObject json) {
+		return new DefaultAudioTrackInfo(json.getString("title"), json.getString("author"), json.getLong("length"), json.getString("identifier"), json.getBoolean("isStream"), json.getString("uri"), json.getString("sourceName"));
 	}
 
 	@Override

@@ -22,26 +22,26 @@
 
 package lavalink.client.player.event;
 
-import lavalink.client.player.track.TrackEndReason;
+import lavalink.client.player.track.AudioTrackEndReason;
 import lavalink.client.player.IPlayer;
-import lavalink.client.player.track.DefaultTrack;
+import lavalink.client.player.track.DefaultAudioTrack;
 
 public class TrackEndEvent extends PlayerEvent {
 
-	private final DefaultTrack track;
-	private final TrackEndReason reason;
+	private final DefaultAudioTrack track;
+	private final AudioTrackEndReason reason;
 
-	public TrackEndEvent(IPlayer player, DefaultTrack track, TrackEndReason reason) {
+	public TrackEndEvent(IPlayer player, DefaultAudioTrack track, AudioTrackEndReason reason) {
 		super(player);
 		this.track = track;
 		this.reason = reason;
 	}
 
-	public DefaultTrack getTrack() {
+	public DefaultAudioTrack getTrack() {
 		return this.track;
 	}
 
-	public TrackEndReason getReason() {
+	public AudioTrackEndReason getReason() {
 		return this.reason;
 	}
 }

@@ -23,20 +23,20 @@
 package lavalink.client.player.event;
 
 import lavalink.client.player.IPlayer;
-import lavalink.client.player.track.DefaultTrack;
+import lavalink.client.player.track.DefaultAudioTrack;
 
 public class TrackExceptionEvent extends PlayerEvent {
 
-	private final DefaultTrack track;
+	private final DefaultAudioTrack track;
 	private final Exception exception;
 
-	public TrackExceptionEvent(IPlayer player, DefaultTrack track, Exception exception) {
+	public TrackExceptionEvent(IPlayer player, DefaultAudioTrack track, Exception exception) {
 		super(player);
 		this.track = track;
 		this.exception = exception;
 	}
 
-	public DefaultTrack getTrack() {
+	public DefaultAudioTrack getTrack() {
 		return this.track;
 	}
 

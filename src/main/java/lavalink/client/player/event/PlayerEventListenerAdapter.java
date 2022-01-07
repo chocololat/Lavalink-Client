@@ -23,8 +23,8 @@
 package lavalink.client.player.event;
 
 import lavalink.client.player.IPlayer;
-import lavalink.client.player.track.Track;
-import lavalink.client.player.track.TrackEndReason;
+import lavalink.client.player.track.AudioTrack;
+import lavalink.client.player.track.AudioTrackEndReason;
 
 public class PlayerEventListenerAdapter implements IPlayerEventListener {
 
@@ -49,7 +49,7 @@ public class PlayerEventListenerAdapter implements IPlayerEventListener {
 	 * @param track  Audio track that started
 	 */
 	@SuppressWarnings("unused")
-	public void onTrackStart(IPlayer player, Track track) {
+	public void onTrackStart(IPlayer player, AudioTrack track) {
 		// Adapter dummy method
 	}
 
@@ -59,7 +59,7 @@ public class PlayerEventListenerAdapter implements IPlayerEventListener {
 	 * @param endReason The reason why the track stopped playing
 	 */
 	@SuppressWarnings("unused")
-	public void onTrackEnd(IPlayer player, Track track, TrackEndReason endReason) {
+	public void onTrackEnd(IPlayer player, AudioTrack track, AudioTrackEndReason endReason) {
 		// Adapter dummy method
 	}
 
@@ -69,7 +69,7 @@ public class PlayerEventListenerAdapter implements IPlayerEventListener {
 	 * @param exception The exception that occurred
 	 */
 	@SuppressWarnings("unused")
-	public void onTrackException(IPlayer player, Track track, Exception exception) {
+	public void onTrackException(IPlayer player, AudioTrack track, Exception exception) {
 		// Adapter dummy method
 	}
 
@@ -79,7 +79,7 @@ public class PlayerEventListenerAdapter implements IPlayerEventListener {
 	 * @param thresholdMs The wait threshold that was exceeded for this event to trigger
 	 */
 	@SuppressWarnings("unused")
-	public void onTrackStuck(IPlayer player, Track track, long thresholdMs) {
+	public void onTrackStuck(IPlayer player, AudioTrack track, long thresholdMs) {
 		// Adapter dummy method
 	}
 

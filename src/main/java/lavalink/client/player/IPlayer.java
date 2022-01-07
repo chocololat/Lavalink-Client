@@ -23,15 +23,15 @@
 package lavalink.client.player;
 
 import lavalink.client.player.event.IPlayerEventListener;
-import lavalink.client.player.track.Track;
+import lavalink.client.player.track.AudioTrack;
 
 public interface IPlayer {
 
-	Track getPlayingTrack();
+	AudioTrack getPlayingTrack();
 
-	void playTrack(Track track);
+	void playTrack(AudioTrack track);
 
-	void playTrack(Track track, long startTime, long endTime);
+	void playTrack(AudioTrack track, long startTime, long endTime);
 
 	void stopTrack();
 
@@ -40,6 +40,7 @@ public interface IPlayer {
 
 	boolean isPaused();
 
+	@SuppressWarnings("unused")
 	long getTrackPosition();
 
 	@SuppressWarnings("unused")

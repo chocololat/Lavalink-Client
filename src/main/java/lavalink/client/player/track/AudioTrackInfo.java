@@ -1,6 +1,6 @@
 package lavalink.client.player.track;
 
-public interface TrackInfo {
+public interface AudioTrackInfo {
 
 	String getTitle();
 	String getAuthor();

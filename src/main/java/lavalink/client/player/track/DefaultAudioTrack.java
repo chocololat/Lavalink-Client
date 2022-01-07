@@ -2,32 +2,32 @@ package lavalink.client.player.track;
 
 import java.io.IOException;
 
-public class DefaultTrack implements Track {
+public class DefaultAudioTrack implements AudioTrack {
 
 	private String trackBase64;
-	private TrackInfo info;
+	private AudioTrackInfo info;
 	private Object userData;
 
-	public DefaultTrack(String trackBase64, TrackInfo info) {
+	public DefaultAudioTrack(String trackBase64, AudioTrackInfo info) {
 		this.trackBase64 = trackBase64;
 		this.info = info;
 	}
 
-	public DefaultTrack(String trackBase64, TrackInfo info, Object userData) {
+	public DefaultAudioTrack(String trackBase64, AudioTrackInfo info, Object userData) {
 		this.trackBase64 = trackBase64;
 		this.info = info;
 		this.userData = userData;
 	}
 
-	public DefaultTrack(DefaultTrackInfo info) {
+	public DefaultAudioTrack(DefaultAudioTrackInfo info) {
 		this.info = info;
 	}
 
-	public DefaultTrack(String trackBase64) {
+	public DefaultAudioTrack(String trackBase64) {
 		this.trackBase64 = trackBase64;
 	}
 
-	public DefaultTrack(String trackBase64, Track oldTrack) {
+	public DefaultAudioTrack(String trackBase64, AudioTrack oldTrack) {
 		this.trackBase64 = trackBase64;
 		if (oldTrack != null && oldTrack.getUserData() != null) {
 			this.userData = oldTrack.getUserData();
@@ -37,7 +37,7 @@ public class DefaultTrack implements Track {
 	public String getTrack() {
 		if (this.trackBase64 == null) {
 			try {
-				this.trackBase64 = Track.encode(this.info);
+				this.trackBase64 = AudioTrack.encode(this.info);
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
@@ -45,10 +45,10 @@ public class DefaultTrack implements Track {
 		return this.trackBase64;
 	}
 
-	public TrackInfo getInfo() {
+	public AudioTrackInfo getInfo() {
 		if (this.info == null) {
 			try {
-				this.info = Track.decode(this.trackBase64);
+				this.info = AudioTrack.decode(this.trackBase64);
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}

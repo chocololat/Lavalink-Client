@@ -2,13 +2,13 @@ package lavalink.client.player.track;
 
 import java.util.List;
 
-public class DefaultPlaylist implements Playlist {
+public class DefaultAudioPlaylist implements AudioPlaylist {
 
 	private final String name;
-	private final List<Track> tracks;
+	private final List<AudioTrack> tracks;
 	private final int selectedTrack;
 
-	public DefaultPlaylist(String name, List<Track> tracks, int selectedTrack) {
+	public DefaultAudioPlaylist(String name, List<AudioTrack> tracks, int selectedTrack) {
 		this.name = name;
 		this.tracks = tracks;
 		this.selectedTrack = selectedTrack;
@@ -18,11 +18,11 @@ public class DefaultPlaylist implements Playlist {
 		return this.name;
 	}
 
-	public List<Track> getTracks() {
+	public List<AudioTrack> getTracks() {
 		return this.tracks;
 	}
 
-	public Track getSelectedTrack() {
+	public AudioTrack getSelectedTrack() {
 		if (this.selectedTrack == -1) {
 			return null;
 		}

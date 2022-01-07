@@ -26,8 +26,8 @@ import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.Nullable;
 import lavalink.client.player.LavalinkPlayer;
 import lavalink.client.player.event.*;
-import lavalink.client.player.track.DefaultTrack;
-import lavalink.client.player.track.TrackEndReason;
+import lavalink.client.player.track.DefaultAudioTrack;
+import lavalink.client.player.track.AudioTrackEndReason;
 import org.java_websocket.drafts.Draft;
 import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONObject;
@@ -129,12 +129,12 @@ public class LavalinkSocket extends ReusableWebSocket {
 
 		switch (json.getString("type")) {
 			case "TrackStartEvent":
-				event = new TrackStartEvent(player, new DefaultTrack(json.getString("track"), player.getPlayingTrack()));
+				event = new TrackStartEvent(player, new DefaultAudioTrack(json.getString("track"), player.getPlayingTrack()));
 				break;
 			case "TrackEndEvent":
-				TrackEndReason endReason = TrackEndReason.valueOf(json.getString("reason"));
-				event = new TrackEndEvent(player, new DefaultTrack(json.getString("track"), player.getPlayingTrack()), endReason);
-				if (endReason != TrackEndReason.REPLACED && endReason != TrackEndReason.STOPPED) {
+				AudioTrackEndReason endReason = AudioTrackEndReason.valueOf(json.getString("reason"));
+				event = new TrackEndEvent(player, new DefaultAudioTrack(json.getString("track"), player.getPlayingTrack()), endReason);
+				if (endReason != AudioTrackEndReason.REPLACED && endReason != AudioTrackEndReason.STOPPED) {
 					player.clearTrack();
 				}
 				break;
@@ -148,10 +148,10 @@ public class LavalinkSocket extends ReusableWebSocket {
 					ex = new RemoteTrackException(json.getString("error"));
 				}
 
-				event = new TrackExceptionEvent(player, new DefaultTrack(json.getString("track"), player.getPlayingTrack()), ex);
+				event = new TrackExceptionEvent(player, new DefaultAudioTrack(json.getString("track"), player.getPlayingTrack()), ex);
 				break;
 			case "TrackStuckEvent":
-				event = new TrackStuckEvent(player, new DefaultTrack(json.getString("track"), player.getPlayingTrack()), json.getLong("thresholdMs"));
+				event = new TrackStuckEvent(player, new DefaultAudioTrack(json.getString("track"), player.getPlayingTrack()), json.getLong("thresholdMs"));
 				break;
 			case "WebSocketClosedEvent":
 				// Unlike the other events, this is handled by the Link instead of the LavalinkPlayer,

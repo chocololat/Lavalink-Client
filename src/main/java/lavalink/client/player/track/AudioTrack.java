@@ -3,7 +3,7 @@ package lavalink.client.player.track;
 import java.io.*;
 import java.util.Base64;
 
-public interface Track {
+public interface AudioTrack {
 
 	int TRACK_INFO_VERSIONED = 1;
 	int TRACK_INFO_VERSION = 2;
@@ -21,7 +21,7 @@ public interface Track {
 		return exists ? input.readUTF() : null;
 	}
 
-	static TrackInfo decode(String track) throws IOException {
+	static AudioTrackInfo decode(String track) throws IOException {
 		ByteArrayInputStream bais = new ByteArrayInputStream(Base64.getDecoder().decode(track));
 		MessageInput stream = new MessageInput(bais);
 		DataInput input = stream.nextMessage();
@@ -31,7 +31,7 @@ public interface Track {
 
 		input.readByte();
 
-		TrackInfo trackInfo = new DefaultTrackInfo(
+		AudioTrackInfo trackInfo = new DefaultAudioTrackInfo(
 				input.readUTF(),
 				input.readUTF(),
 				input.readLong(),
@@ -45,7 +45,7 @@ public interface Track {
 		return trackInfo;
 	}
 
-	static String encode(TrackInfo trackInfo) throws IOException {
+	static String encode(AudioTrackInfo trackInfo) throws IOException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		MessageOutput stream = new MessageOutput(baos);
 		DataOutput output = stream.startMessage();
@@ -66,7 +66,7 @@ public interface Track {
 
 	String getTrack();
 
-	TrackInfo getInfo();
+	AudioTrackInfo getInfo();
 
 	void setUserData(Object userData);
 

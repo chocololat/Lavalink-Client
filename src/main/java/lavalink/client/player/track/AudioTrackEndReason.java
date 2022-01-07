@@ -1,6 +1,6 @@
 package lavalink.client.player.track;
 
-public enum TrackEndReason {
+public enum AudioTrackEndReason {
 	/**
 	 * This means that the track itself emitted a terminator. This is usually caused by the track reaching the end,
 	 * however it will also be used when it ends due to an exception.
@@ -32,7 +32,7 @@ public enum TrackEndReason {
 	 */
 	public final boolean mayStartNext;
 
-	TrackEndReason(boolean mayStartNext) {
+	AudioTrackEndReason(boolean mayStartNext) {
 		this.mayStartNext = mayStartNext;
 	}
 }

@@ -23,20 +23,20 @@
 package lavalink.client.player.event;
 
 import lavalink.client.player.IPlayer;
-import lavalink.client.player.track.DefaultTrack;
+import lavalink.client.player.track.DefaultAudioTrack;
 
 public class TrackStuckEvent extends PlayerEvent {
 
-	private final DefaultTrack track;
+	private final DefaultAudioTrack track;
 	private final long thresholdMs;
 
-	public TrackStuckEvent(IPlayer player, DefaultTrack track, long thresholdMs) {
+	public TrackStuckEvent(IPlayer player, DefaultAudioTrack track, long thresholdMs) {
 		super(player);
 		this.track = track;
 		this.thresholdMs = thresholdMs;
 	}
 
-	public DefaultTrack getTrack() {
+	public DefaultAudioTrack getTrack() {
 		return this.track;
 	}
 

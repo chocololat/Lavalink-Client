@@ -29,7 +29,7 @@ import lavalink.client.player.event.IPlayerEventListener;
 import lavalink.client.player.event.PlayerEvent;
 import lavalink.client.player.event.PlayerPauseEvent;
 import lavalink.client.player.event.PlayerResumeEvent;
-import lavalink.client.player.track.Track;
+import lavalink.client.player.track.AudioTrack;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -40,7 +40,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class LavalinkPlayer implements IPlayer {
 
-	private Track track = null;
+	private AudioTrack track = null;
 	private boolean paused = false;
 	private int volume = 100;
 	private long updateTime = -1;
@@ -69,7 +69,7 @@ public class LavalinkPlayer implements IPlayer {
 	 * Used when we are moved to a new socket
 	 */
 	public void onNodeChange() {
-		Track track = getPlayingTrack();
+		AudioTrack track = getPlayingTrack();
 		if (track != null) {
 			playTrack(track);
 		}
@@ -77,17 +77,17 @@ public class LavalinkPlayer implements IPlayer {
 	}
 
 	@Override
-	public Track getPlayingTrack() {
+	public AudioTrack getPlayingTrack() {
 		return track;
 	}
 
 	@Override
-	public void playTrack(Track track) {
+	public void playTrack(AudioTrack track) {
 		playTrack(track, 0, 0);
 	}
 
 	@Override
-	public void playTrack(Track track, long startTime, long endTime) {
+	public void playTrack(AudioTrack track, long startTime, long endTime) {
 		JSONObject json = new JSONObject();
 		json.put("op", "play");
 		json.put("guildId", Long.toString(link.getGuildId()));

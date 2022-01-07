@@ -23,18 +23,18 @@
 package lavalink.client.player.event;
 
 import lavalink.client.player.IPlayer;
-import lavalink.client.player.track.DefaultTrack;
+import lavalink.client.player.track.DefaultAudioTrack;
 
 public class TrackStartEvent extends PlayerEvent {
 
-	private final DefaultTrack track;
+	private final DefaultAudioTrack track;
 
-	public TrackStartEvent(IPlayer player, DefaultTrack track) {
+	public TrackStartEvent(IPlayer player, DefaultAudioTrack track) {
 		super(player);
 		this.track = track;
 	}
 
-	public DefaultTrack getTrack() {
+	public DefaultAudioTrack getTrack() {
 		return this.track;
 	}
 }

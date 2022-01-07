@@ -76,7 +76,7 @@ public final class LavalinkRestClient {
 	 * @return a list of YouTube search results as {@code AudioTrack audio tracks}
 	 */
 	@NonNull
-	public CompletableFuture<List<Track>> getYoutubeSearchResult(final String query) {
+	public CompletableFuture<List<AudioTrack>> getYoutubeSearchResult(final String query) {
 		return load(YOUTUBE_SEARCH_PREFIX + query)
 				.thenApplyAsync(LavalinkRestClient::transformSearchResult);
 	}
@@ -90,7 +90,7 @@ public final class LavalinkRestClient {
 	 * @return a list of SoundCloud search results as {@code AudioTrack audio tracks}
 	 */
 	@NonNull
-	public CompletableFuture<List<Track>> getSoundcloudSearchResult(final String query) {
+	public CompletableFuture<List<AudioTrack>> getSoundcloudSearchResult(final String query) {
 		return load(SOUNDCLOUD_SEARCH_PREFIX + query)
 				.thenApplyAsync(LavalinkRestClient::transformSearchResult);
 	}
@@ -155,9 +155,9 @@ public final class LavalinkRestClient {
 		});
 	}
 
-	private static List<Track> transformSearchResult(JSONObject loadResult) {
+	private static List<AudioTrack> transformSearchResult(JSONObject loadResult) {
 		return loadResult.getJSONArray("tracks").toList().stream().map(track ->
-				new DefaultTrack(new JSONObject((Map<?, ?>) track).getString("track"))
+				new DefaultAudioTrack(new JSONObject((Map<?, ?>) track).getString("track"))
 		).collect(Collectors.toList());
 	}
 
@@ -199,23 +199,23 @@ public final class LavalinkRestClient {
 			this.loadResult = loadResult;
 		}
 
-		private Track handleTrackLoaded() {
+		private AudioTrack handleTrackLoaded() {
 			JSONObject trackObject = loadResult.getJSONArray("tracks").getJSONObject(0);
 			String singleTrackBase64 = trackObject.getString("track");
-			TrackInfo trackInfo = DefaultTrackInfo.fromJSON(trackObject.getJSONObject("info"));
+			AudioTrackInfo trackInfo = DefaultAudioTrackInfo.fromJSON(trackObject.getJSONObject("info"));
 
-			return new DefaultTrack(singleTrackBase64, trackInfo);
+			return new DefaultAudioTrack(singleTrackBase64, trackInfo);
 		}
 
-		private Playlist handlePlaylistLoaded() {
+		private AudioPlaylist handlePlaylistLoaded() {
 			JSONArray trackData = loadResult.getJSONArray("tracks");
-			final List<Track> tracks = new ArrayList<>();
+			final List<AudioTrack> tracks = new ArrayList<>();
 
 			for (Object track : trackData) {
 				String trackBase64 = ((JSONObject) track).getString("track");
-				TrackInfo trackInfo = DefaultTrackInfo.fromJSON(((JSONObject) track).getJSONObject("info"));
+				AudioTrackInfo trackInfo = DefaultAudioTrackInfo.fromJSON(((JSONObject) track).getJSONObject("info"));
 
-				tracks.add(new DefaultTrack(trackBase64, trackInfo));
+				tracks.add(new DefaultAudioTrack(trackBase64, trackInfo));
 			}
 
 			if (tracks.size() == 0) {
@@ -224,18 +224,18 @@ public final class LavalinkRestClient {
 
 			final JSONObject playlistInfo = loadResult.getJSONObject("playlistInfo");
 
-			return new DefaultPlaylist(playlistInfo.getString("name"), tracks, playlistInfo.optInt("selectedTrack", -1));
+			return new DefaultAudioPlaylist(playlistInfo.getString("name"), tracks, playlistInfo.optInt("selectedTrack", -1));
 		}
 
-		private List<Track> handleSearchResultLoaded() {
+		private List<AudioTrack> handleSearchResultLoaded() {
 			JSONArray trackData = loadResult.getJSONArray("tracks");
-			List<Track> tracks = new ArrayList<>();
+			List<AudioTrack> tracks = new ArrayList<>();
 
 			for (Object track : trackData) {
 				String trackBase64 = ((JSONObject) track).getString("track");
-				TrackInfo trackInfo = DefaultTrackInfo.fromJSON(((JSONObject) track).getJSONObject("info"));
+				AudioTrackInfo trackInfo = DefaultAudioTrackInfo.fromJSON(((JSONObject) track).getJSONObject("info"));
 
-				tracks.add(new DefaultTrack(trackBase64, trackInfo));
+				tracks.add(new DefaultAudioTrack(trackBase64, trackInfo));
 			}
 
 			if (tracks.size() == 0) {
