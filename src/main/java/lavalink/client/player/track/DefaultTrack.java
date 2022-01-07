@@ -56,10 +56,6 @@ public class DefaultTrack implements Track {
 		return this.info;
 	}
 
-	public Track makeClone() {
-		return new DefaultTrack(null, this.getInfo().makeClone(), this.userData);
-	}
-
 	public void setUserData(Object userData) {
 		this.userData = userData;
 	}

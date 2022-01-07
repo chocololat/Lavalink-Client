@@ -31,15 +31,15 @@ public interface Track {
 
 		input.readByte();
 
-		TrackInfo trackInfo = new DefaultTrackInfo(input.readUTF(),
+		TrackInfo trackInfo = new DefaultTrackInfo(
+				input.readUTF(),
 				input.readUTF(),
 				input.readLong(),
 				input.readUTF(),
 				input.readBoolean(),
 				readNullableText(input),
-				readNullableText(input),
-				input.readLong());
-
+				input.readUTF()
+		);
 
 		stream.skipRemainingBytes();
 		return trackInfo;
@@ -57,8 +57,7 @@ public interface Track {
 		output.writeUTF(trackInfo.getIdentifier());
 		output.writeBoolean(trackInfo.isStream());
 		writeNullableText(output, trackInfo.getUri());
-		writeNullableText(output, trackInfo.getSourceName());
-		output.writeLong(trackInfo.getPosition());
+		output.writeUTF(trackInfo.getSourceName());
 
 		stream.commitMessage(TRACK_INFO_VERSIONED);
 
@@ -68,8 +67,6 @@ public interface Track {
 	String getTrack();
 
 	TrackInfo getInfo();
-
-	Track makeClone();
 
 	void setUserData(Object userData);
 

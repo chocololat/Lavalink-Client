@@ -9,7 +9,4 @@ public interface TrackInfo {
 	boolean isStream();
 	String getUri();
 	String getSourceName();
-	long getPosition();
-
-	TrackInfo makeClone();
 }

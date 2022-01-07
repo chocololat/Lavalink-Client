@@ -11,9 +11,8 @@ public class DefaultTrackInfo implements TrackInfo {
 	private final boolean isStream;
 	private final String uri;
 	private final String sourceName;
-	private final long position;
 
-	public DefaultTrackInfo(String title, String author, long length, String identifier, boolean isStream, String uri, String sourceName, long position) {
+	public DefaultTrackInfo(String title, String author, long length, String identifier, boolean isStream, String uri, String sourceName) {
 		this.title = title;
 		this.author = author;
 		this.length = length;
@@ -21,11 +20,10 @@ public class DefaultTrackInfo implements TrackInfo {
 		this.isStream = isStream;
 		this.uri = uri;
 		this.sourceName = sourceName;
-		this.position = position;
 	}
 
 	public static TrackInfo fromJSON(JSONObject json) {
-		return new DefaultTrackInfo(json.getString("title"), json.getString("author"), json.getLong("length"), json.getString("identifier"), json.getBoolean("isStream"), json.getString("uri"), json.getString("sourceName"), json.getLong("position"));
+		return new DefaultTrackInfo(json.getString("title"), json.getString("author"), json.getLong("length"), json.getString("identifier"), json.getBoolean("isStream"), json.getString("uri"), json.getString("sourceName"));
 	}
 
 	@Override
@@ -63,12 +61,4 @@ public class DefaultTrackInfo implements TrackInfo {
 		return this.sourceName;
 	}
 
-	@Override
-	public long getPosition() {
-		return this.position;
-	}
-
-	public TrackInfo makeClone() {
-		return new DefaultTrackInfo(this.title, this.author, this.length, this.identifier, this.isStream, this.uri, this.sourceName, 0);
-	}
 }
