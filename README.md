@@ -50,7 +50,7 @@ dev-SNAPSHOT
 Version tags of this client are expected to roughly follow lavalink server versioning.
 
 ## Usage
-This guide assumes you have JDA in your classpath, and your bot is written with JDA.
+This guide assumes you have JDA5 in your classpath, and your bot is written with JDA.
 
 ### Configuring Lavalink
 All your shards should share a single Lavalink instance. Here is how to construct an instance:
