@@ -52,7 +52,7 @@ public class JdaLink extends Link {
         if (checkChannel && channel.equals(voiceState.getChannel()))
             return;
 
-        if (voiceState.inVoiceChannel()) {
+        if (voiceState.inAudioChannel()) {
             final int userLimit = channel.getUserLimit(); // userLimit is 0 if no limit is set!
             if (!self.isOwner() && !self.hasPermission(Permission.ADMINISTRATOR)) {
                 if (userLimit > 0                                                      // If there is a userlimit
