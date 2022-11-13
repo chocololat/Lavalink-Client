@@ -73,7 +73,7 @@ public class JdaLink extends Link {
         }
 
         setState(State.CONNECTING);
-        queueAudioConnect(channel.getIdLong());
+        queueAudioConnect(channel.getIdLong(), channel.getType());
     }
 
     @SuppressWarnings("WeakerAccess")
@@ -95,16 +95,6 @@ public class JdaLink extends Link {
             getJda().getDirectAudioController().disconnect(g);
         } else {
             log.warn("Attempted to disconnect, but guild {} was not found", guildId);
-        }
-    }
-
-    @Override
-    protected void queueAudioConnect(long channelId) {
-        VoiceChannel vc = getJda().getVoiceChannelById(channelId);
-        if (vc != null) {
-            getJda().getDirectAudioController().connect(vc);
-        } else {
-            log.warn("Attempted to connect, but voice channel {} was not found", channelId);
         }
     }
 
