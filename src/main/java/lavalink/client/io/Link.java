@@ -25,6 +25,7 @@ package lavalink.client.io;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.Nullable;
 import lavalink.client.player.LavalinkPlayer;
+import net.dv8tion.jda.api.entities.channel.ChannelType;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -135,6 +136,7 @@ abstract public class Link {
     protected abstract void removeConnection();
     protected abstract void queueAudioDisconnect();
     protected abstract void queueAudioConnect(long channelId);
+    protected abstract void queueAudioConnect(long channelId, ChannelType type);
 
     /**
      * @return The current node
