@@ -110,9 +110,9 @@ public class JdaLink extends Link {
         } else {
             StageChannel sg = getJda().getStageChannelById(channelId);
             if (sg != null) {
+                if (sg.getStageInstance() != null) sg.createStageInstance("Test Topic !").queue();
+                getGuild().requestToSpeak();
                 getJda().getDirectAudioController().connect(sg);
-                getGuild().getAudioManager().openAudioConnection(sg);
-                sg.requestToSpeak();
             } else {
                 log.warn("Attempted to connect, but Stage channel {} was not found", channelId);
             }
