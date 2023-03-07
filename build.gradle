@@ -22,7 +22,7 @@ dependencies {
     implementation "commons-io:commons-io:2.11.0"
     implementation "org.java-websocket:Java-WebSocket:1.5.3"
     implementation "org.json:json:20220320"
-    api "net.dv8tion:JDA:5.0.0-beta.3"
+    api "net.dv8tion:JDA:5.0.0-beta.5"
     api "org.slf4j:slf4j-api:1.7.36"
     api "com.github.spotbugs:spotbugs-annotations:4.6.0"
     api "io.prometheus:simpleclient:0.15.0"
